@@ -14,7 +14,7 @@ class TeamRepository {
     fun getTeam(): Observable<List<TeamMember>> {
 
         val retrofit = Retrofit.Builder()
-                .baseUrl("https://pager-team.herokuapp.com")
+                .baseUrl(BuildConfig.APP_BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
 
