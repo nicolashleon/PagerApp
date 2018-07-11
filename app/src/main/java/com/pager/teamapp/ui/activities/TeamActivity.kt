@@ -3,6 +3,7 @@ package com.pager.teamapp.ui.activities
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.pager.teamapp.R
@@ -28,11 +29,11 @@ class TeamActivity : AppCompatActivity(), TeamMembersView {
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.activity_team_toolbar_title)
         presenter = TeamMembersPresenter()
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.addItemDecoration(TeamItemDecoration())
         adapter = TeamMembersAdapter()
+        recyclerView.layoutManager = LinearLayoutManager(this@TeamActivity)
+        recyclerView.addItemDecoration(TeamItemDecoration())
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         recyclerView.adapter = adapter
-
     }
 
     override fun onResume() {

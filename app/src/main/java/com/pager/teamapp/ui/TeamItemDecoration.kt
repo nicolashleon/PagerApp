@@ -9,6 +9,7 @@ class TeamItemDecoration : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
         super.getItemOffsets(outRect, view, parent, state)
-        outRect?.top = view?.resources?.getDimensionPixelOffset(R.dimen.item_decoration_offset) ?: 0
+        outRect?.top = view?.resources?.getDimensionPixelOffset(R.dimen.half_margin) ?: 0
+        outRect?.bottom = view?.resources?.getDimensionPixelOffset(R.dimen.half_margin) ?: 0
     }
 }
