@@ -17,12 +17,12 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField "String", "APP_BASE_URL", "\"https://pager-team.herokuapp.com/\""
+            buildConfigField "String", "APP_BASE_URL", "\"https://pager-team.herokuapp.com\""
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "APP_BASE_URL", "\"https://pager-team.herokuapp.com/\""
+            buildConfigField "String", "APP_BASE_URL", "\"https://pager-team.herokuapp.com\""
         }
     }
 }
@@ -41,6 +41,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
 
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

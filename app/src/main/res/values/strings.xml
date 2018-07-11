@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TeamApp</string>
     <string name="action_settings">Settings</string>
+    <string name="activity_team_toolbar_title">Pager Team</string>
+    <string name="activity_team_error_msg">Error loading team members</string>
+    <string name="action_reload">RELOAD</string>
 </resources>
