@@ -69,6 +69,7 @@ class TeamActivity : AppCompatActivity(), TeamMembersView {
 
     override fun showTeamMembers(members: List<TeamMember>) {
         adapter.addAllItemsAndNotify(members)
+        presenter.getStatusUpdates()
     }
 
     //endRegion

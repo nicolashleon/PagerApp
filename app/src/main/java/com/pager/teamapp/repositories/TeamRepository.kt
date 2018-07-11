@@ -1,5 +1,6 @@
-package com.pager.teamapp
+package com.pager.teamapp.repositories
 
+import com.pager.teamapp.BuildConfig
 import com.pager.teamapp.extensions.EMPTY_STRING
 import com.pager.teamapp.models.Person
 import com.pager.teamapp.network.TeamService
