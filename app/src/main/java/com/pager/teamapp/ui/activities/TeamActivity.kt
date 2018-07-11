@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import com.pager.teamapp.R
+import com.pager.teamapp.ui.TeamItemDecoration
 import com.pager.teamapp.ui.adapters.TeamMembersAdapter
 import com.pager.teamapp.ui.models.TeamMember
 import com.pager.teamapp.ui.presenters.TeamMembersPresenter
@@ -30,6 +29,7 @@ class TeamActivity : AppCompatActivity(), TeamMembersView {
         supportActionBar?.title = getString(R.string.activity_team_toolbar_title)
         presenter = TeamMembersPresenter()
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.addItemDecoration(TeamItemDecoration())
         adapter = TeamMembersAdapter()
         recyclerView.adapter = adapter
 
@@ -58,7 +58,7 @@ class TeamActivity : AppCompatActivity(), TeamMembersView {
 
     override fun showError() {
         val snackbar = Snackbar.make(coordinatorLayout,
-                getString(R.string.activity_team_error_msg),
+                getString(R.string.txt_error_msg),
                 Snackbar.LENGTH_LONG)
 
         snackbar.setAction(getString(R.string.action_reload)) { presenter.getTeamMembers() }

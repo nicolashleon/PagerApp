@@ -33,7 +33,8 @@ class TeamRepository {
                         roles.getOrDefault(it.role.toString(), String.EMPTY_STRING()),
                         it.languages,
                         it.tags,
-                        it.location))
+                        it.location,
+                        github = it.github))
             }
             members
         })
