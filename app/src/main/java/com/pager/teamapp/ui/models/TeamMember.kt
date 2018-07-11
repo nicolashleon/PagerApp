@@ -8,11 +8,15 @@ data class TeamMember(var name: String = String.EMPTY_STRING(),
                       var languages: List<String> = ArrayList(),
                       var skills: List<String> = ArrayList(),
                       var location: String = String.EMPTY_STRING(),
-                      var status: String = String.EMPTY_STRING()) : DelegateUIModel {
+                      var status: String = String.EMPTY_STRING(),
+                      var github : String = String.EMPTY_STRING(),
+                      var isExpanded: Boolean = false) : DelegateUIModel {
     companion object {
-        private const val TEAM_MEMBER_VIEW_TYPE = 1
+        const val TEAM_MEMBER_VIEW_TYPE = 1
+        fun getNameComparator(): Comparator<TeamMember> {
+            return Comparator { o1, o2 -> o1.name.compareTo(o2.name, ignoreCase = true) }
+        }
     }
 
     override val viewType: Int = TEAM_MEMBER_VIEW_TYPE
-
 }

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/ic_dimen_48dp"
+            android:layout_height="@dimen/ic_dimen_48dp"
+            android:layout_margin="@dimen/normal_margin"
+            android:src="@drawable/ic_avatar_outline_48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <Button
+            android:id="@+id/dropButton"
+            android:layout_width="@dimen/ic_dimen_48dp"
+            android:layout_height="@dimen/ic_dimen_48dp"
+            android:layout_margin="@dimen/normal_margin"
+            android:background="@drawable/selector_drop_arrows"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/nameRoleLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+
+        <LinearLayout
+            android:id="@+id/nameRoleLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dropButton"
+            app:layout_constraintStart_toEndOf="@id/imageView"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:textColor="@android:color/black"
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Nicolas Hurtado" />
+
+            <TextView
+                android:id="@+id/roleTextView"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/half_margin"
+                tools:text="Android Developer" />
+
+            <TextView
+                android:id="@+id/statusTextView"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/half_margin"
+                android:text="Available"
+                tools:text="Available" />
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/additionalInformationCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/normal_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/githubHandleTextView"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:drawablePadding="@dimen/half_margin"
+                android:drawableStart="@drawable/ic_code_18dp"
+                tools:text="github.com" />
+
+            <TextView
+                android:id="@+id/skillsTextView"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/half_margin"
+                android:drawablePadding="@dimen/half_margin"
+                android:drawableStart="@drawable/ic_skills_18dp"
+                tools:text="Android, Kotlin, Java" />
+
+            <TextView
+                android:id="@+id/locationTextView"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/half_margin"
+                android:drawablePadding="@dimen/half_margin"
+                android:drawableStart="@drawable/ic_location_18dp"
+                tools:text="Argentina" />
+
+            <TextView
+                android:id="@+id/languagesTextView"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/half_margin"
+                android:drawablePadding="@dimen/half_margin"
+                android:drawableStart="@drawable/ic_languages_18dp"
+                tools:text="Spanish" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

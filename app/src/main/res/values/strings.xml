@@ -1,4 +1,7 @@
 <resources>
-    <string name="app_name">TeamApp</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Pager Team App</string>
+    <string name="activity_team_toolbar_title">Pager Team</string>
+    <string name="txt_error_msg">Error loading team members</string>
+    <string name="action_reload">RELOAD</string>
+    <string name="txt_github_handle" translatable="false">https://github.com/%1$s</string>
 </resources>
