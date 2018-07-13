@@ -6,4 +6,5 @@ interface TeamMembersView : BaseView {
     fun showLoader(isVisible: Boolean)
     fun showError()
     fun showTeamMembers(members: List<TeamMember>)
+    fun showStatusUpdateDialog(teamMember: TeamMember)
 }
