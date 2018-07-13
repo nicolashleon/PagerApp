@@ -4,4 +4,7 @@
     <string name="txt_error_msg">Error loading team members</string>
     <string name="action_reload">RELOAD</string>
     <string name="txt_github_handle" translatable="false">https://github.com/%1$s</string>
+    <string name="txt_update_status_btn">Update Status</string>
+    <string name="txt_send">Send</string>
+    <string name="txt_toast_send_status_update">Status Update Sent</string>
 </resources>

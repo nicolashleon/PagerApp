@@ -50,5 +50,14 @@ class TeamMembersPresenter : Presenter<TeamMembersView>() {
             }
 
         }))
+
+    }
+    
+    fun sendStatusUpdate(status: String, teamMember: TeamMember) {
+        //TODO finish implementation to send the update to the websocket using a repository.
+    }
+
+    fun showUpdateStatusDialog(teamMember: TeamMember) {
+        baseView?.showStatusUpdateDialog(teamMember)
     }
 }
