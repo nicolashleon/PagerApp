@@ -1,7 +1,6 @@
 package com.pager.teamapp.ui.presenters
 
 import android.util.Log
-import com.pager.teamapp.models.Update
 import com.pager.teamapp.repositories.StatusRepository
 import com.pager.teamapp.repositories.TeamRepository
 import com.pager.teamapp.ui.models.TeamMember
@@ -35,14 +34,14 @@ class TeamMembersPresenter : Presenter<TeamMembersView>() {
 
         }))
     }
-    
+
     fun getStatusUpdates() {
-        addDisposable(StatusRepository().getUpdates().subscribeWith(object : DisposableSubscriber<Update>() {
+        addDisposable(StatusRepository().getUpdatesOkHttp().subscribeWith(object : DisposableSubscriber<Any>() {
             override fun onComplete() {
                 Log.d("TeamMembersPresenter", "No status updates to display")
             }
 
-            override fun onNext(t: Update?) {
+            override fun onNext(t: Any?) {
                 Log.d("TeamMembersPresenter", t.toString())
             }
 
