@@ -14,6 +14,7 @@ import android.widget.Toast
 import com.pager.teamapp.R
 import com.pager.teamapp.ui.TeamItemDecoration
 import com.pager.teamapp.ui.adapters.TeamMembersAdapter
+import com.pager.teamapp.ui.models.Status
 import com.pager.teamapp.ui.models.TeamMember
 import com.pager.teamapp.ui.presenters.TeamMembersPresenter
 import com.pager.teamapp.ui.views.TeamMembersView
@@ -64,7 +65,7 @@ class TeamActivity : AppCompatActivity(), TeamMembersView, TeamMembersAdapter.On
 
     override fun showError() {
         val snackbar = Snackbar.make(coordinatorLayout,
-                getString(R.string.txt_error_msg),
+                getString(R.string.txt_error_msg_load_team),
                 Snackbar.LENGTH_LONG)
 
         snackbar.setAction(getString(R.string.action_reload)) { presenter.getTeamMembers() }
@@ -74,6 +75,8 @@ class TeamActivity : AppCompatActivity(), TeamMembersView, TeamMembersAdapter.On
 
     override fun showTeamMembers(members: List<TeamMember>) {
         adapter.addAllItemsAndNotify(members)
+        presenter.getStatusUpdates()
+        presenter.getNewMemberUpdates()
     }
 
     override fun showStatusUpdateDialog(teamMember: TeamMember) {
@@ -90,10 +93,36 @@ class TeamActivity : AppCompatActivity(), TeamMembersView, TeamMembersAdapter.On
                 .show()
     }
 
-    //endRegion
+    override fun addNewTeamMember(teamMember: TeamMember) {
+        adapter.addItemAndNotify(teamMember)
+    }
 
     override fun onStatusUpdated(teamMember: TeamMember) {
         presenter.showUpdateStatusDialog(teamMember)
     }
+
+    override fun showNewTeamMembersError() {
+        val snackbar = Snackbar.make(coordinatorLayout,
+                getString(R.string.txt_error_msg_load_new_members),
+                Snackbar.LENGTH_LONG)
+
+        snackbar.setAction(getString(R.string.action_reload)) { presenter.getNewMemberUpdates() }
+        snackbar.show()
+    }
+
+    override fun showStatusUpdatesError() {
+        val snackbar = Snackbar.make(coordinatorLayout,
+                getString(R.string.txt_error_msg_load_teams_status),
+                Snackbar.LENGTH_LONG)
+
+        snackbar.setAction(getString(R.string.action_reload)) { presenter.getStatusUpdates() }
+        snackbar.show()
+    }
+
+    override fun updateTeamMemberStatus(status: Status) {
+        adapter.updateMemberStatus(status)
+    }
+
+    //endRegion
 
 }

@@ -11,6 +11,7 @@ data class TeamMember(var name: String = String.EMPTY_STRING(),
                       var status: String = String.EMPTY_STRING(),
                       var github : String = String.EMPTY_STRING(),
                       var isExpanded: Boolean = false) : DelegateUIModel {
+
     companion object {
         const val TEAM_MEMBER_VIEW_TYPE = 1
         fun getNameComparator(): Comparator<TeamMember> {

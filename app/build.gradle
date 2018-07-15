@@ -18,11 +18,13 @@ android {
         debug {
             minifyEnabled false
             buildConfigField "String", "APP_BASE_URL", "\"https://pager-team.herokuapp.com\""
+            buildConfigField "String", "WS_BASE_URL", "\"http://ios-hiring-backend.dokku.canillitapp.com/\""
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "APP_BASE_URL", "\"https://pager-team.herokuapp.com\""
+            buildConfigField "String", "WS_BASE_URL", "\"http://ios-hiring-backend.dokku.canillitapp.com/\""
         }
     }
 }
@@ -43,6 +45,12 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
+    implementation 'com.github.tinder.scarlet:scarlet:0.1.4'
+
+    implementation 'com.github.tinder.scarlet:scarlet-websocket-okhttp:0.1.4'
+    implementation 'com.github.tinder.scarlet:scarlet-message-adapter-moshi:0.1.4'
+    implementation 'com.github.tinder.scarlet:scarlet-stream-adapter-rxjava2:0.1.4'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
