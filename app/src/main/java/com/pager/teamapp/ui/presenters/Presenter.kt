@@ -6,14 +6,15 @@ import io.reactivex.disposables.Disposable
 
 abstract class Presenter<BV : BaseView> {
 
-    var baseView: BV? = null
-    var disposables: CompositeDisposable = CompositeDisposable()
+    internal var baseView: BV? = null
+
+    private var disposables: CompositeDisposable = CompositeDisposable()
 
     fun attach(view: BV) {
         baseView = view
     }
 
-    fun dettach() {
+    fun detach() {
         disposables.dispose()
         baseView = null
     }
