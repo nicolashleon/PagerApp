@@ -1,6 +1,7 @@
 package com.pager.teamapp.ui.presenters
 
-import android.util.Log
+import com.pager.teamapp.logger.Log
+import com.pager.teamapp.logger.Logger
 import com.pager.teamapp.repositories.TeamRepository
 import com.pager.teamapp.repositories.TeamStatusRepository
 import com.pager.teamapp.ui.models.Status
@@ -9,16 +10,25 @@ import com.pager.teamapp.ui.views.TeamMembersView
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.subscribers.DisposableSubscriber
 
-class TeamMembersPresenter : Presenter<TeamMembersView>() {
+class TeamMembersPresenter() : Presenter<TeamMembersView>() {
 
     companion object {
         private const val TAG = "TeamMembersPresenter"
     }
 
+    private var teamRepository: TeamRepository = TeamRepository()
+    private var statusRepository: TeamStatusRepository = TeamStatusRepository()
+    private var log: Log = Logger()
+
+    constructor(teamRepository: TeamRepository, statusRepository: TeamStatusRepository, logger: Log) : this() {
+        this.teamRepository = teamRepository
+        this.statusRepository = statusRepository
+        this.log = logger
+    }
 
     fun getTeamMembers() {
         baseView?.showLoader(true)
-        addDisposable(TeamRepository().getTeam().subscribeWith(object : DisposableObserver<List<TeamMember>>() {
+        addDisposable(teamRepository.getTeam().subscribeWith(object : DisposableObserver<List<TeamMember>>() {
             override fun onComplete() {
                 baseView?.showLoader(false)
             }
@@ -31,7 +41,7 @@ class TeamMembersPresenter : Presenter<TeamMembersView>() {
             }
 
             override fun onError(e: Throwable) {
-                Log.e(TAG, "Error getting the teams", e)
+                log.e(TAG, "Error getting the teams", e)
                 baseView?.apply {
                     showLoader(false)
                     showError()
@@ -42,9 +52,9 @@ class TeamMembersPresenter : Presenter<TeamMembersView>() {
     }
 
     fun getStatusUpdates() {
-        addDisposable(TeamStatusRepository().getMemberStatusUpdates().subscribeWith(object : DisposableSubscriber<Status>() {
+        addDisposable(statusRepository.getMemberStatusUpdates().subscribeWith(object : DisposableSubscriber<Status>() {
             override fun onComplete() {
-                Log.d(TAG, "Team's status updates subscription complete")
+                log.d(TAG, "Team's status updates subscription complete")
             }
 
             override fun onNext(status: Status?) {
@@ -54,7 +64,7 @@ class TeamMembersPresenter : Presenter<TeamMembersView>() {
             }
 
             override fun onError(t: Throwable?) {
-                Log.e(TAG, "Error getting the team's status updates", t)
+                log.e(TAG, "Error getting the team's status updates", t)
                 baseView?.showStatusUpdatesError()
             }
 
@@ -63,9 +73,9 @@ class TeamMembersPresenter : Presenter<TeamMembersView>() {
     }
 
     fun getNewMemberUpdates() {
-        addDisposable(TeamStatusRepository().getNewMemberUpdates().subscribeWith(object : DisposableSubscriber<TeamMember>() {
+        addDisposable(statusRepository.getNewMemberUpdates().subscribeWith(object : DisposableSubscriber<TeamMember>() {
             override fun onComplete() {
-                Log.d(TAG, "New member updates subscription complete")
+                log.d(TAG, "New member updates subscription complete")
             }
 
             override fun onNext(t: TeamMember?) {
@@ -75,7 +85,7 @@ class TeamMembersPresenter : Presenter<TeamMembersView>() {
             }
 
             override fun onError(t: Throwable?) {
-                Log.e(TAG, "Error getting the new member updates", t)
+                log.e(TAG, "Error getting the new member updates", t)
                 baseView?.showNewTeamMembersError()
             }
 
@@ -84,17 +94,17 @@ class TeamMembersPresenter : Presenter<TeamMembersView>() {
     }
 
     fun sendStatusUpdate(status: String, teamMember: TeamMember) {
-        addDisposable(TeamStatusRepository().updateMemberStatus(status, teamMember.github).subscribeWith(object : DisposableSubscriber<Boolean>() {
+        addDisposable(statusRepository.updateMemberStatus(status, teamMember.github).subscribeWith(object : DisposableSubscriber<Boolean>() {
             override fun onComplete() {
-                Log.d(TAG, "status update completed")
+                log.d(TAG, "status update completed")
             }
 
             override fun onNext(t: Boolean?) {
-                Log.d(TAG, "update sent :" + t.toString())
+                log.d(TAG, "update sent :" + t.toString())
             }
 
             override fun onError(t: Throwable?) {
-                Log.d(TAG, "Failed to send status update", t)
+                log.e(TAG, "Failed to send status update", t)
             }
         }))
     }
