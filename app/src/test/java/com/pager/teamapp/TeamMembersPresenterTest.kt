@@ -19,8 +19,7 @@ import io.reactivex.plugins.RxJavaPlugins
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.util.concurrent.Executor
 import java.util.concurrent.TimeUnit
@@ -89,5 +88,40 @@ class TeamMembersPresenterTest {
         `when`(statusRepository!!.getNewMemberUpdates()).thenReturn(Flowable.just(teamMember))
         presenter!!.getNewMemberUpdates()
         verify(view)!!.addNewTeamMember(teamMember)
+    }
+
+    @Test
+    fun testTeamMembersDisplayError() {
+        `when`(teamRepository!!.getTeam()).thenReturn(Observable.error(Exception()))
+        presenter!!.getTeamMembers()
+        verify(view)!!.showError()
+    }
+
+    @Test
+    fun testNewTeamMembersDisplayError() {
+        `when`(statusRepository!!.getNewMemberUpdates()).thenReturn(Flowable.error(Exception()))
+        presenter!!.getNewMemberUpdates()
+        verify(view)!!.showNewTeamMembersError()
+    }
+
+    @Test
+    fun testStatusUpdateDisplayError() {
+        `when`(statusRepository!!.getMemberStatusUpdates()).thenReturn(Flowable.error(Exception()))
+        presenter!!.getStatusUpdates()
+        verify(view)!!.showStatusUpdatesError()
+    }
+
+    @Test
+    fun testNewTeamMembersNoResult() {
+        `when`(statusRepository!!.getNewMemberUpdates()).thenReturn(Flowable.never())
+        presenter!!.getNewMemberUpdates()
+        verify(view, never())!!.showNewTeamMembersError()
+    }
+
+    @Test
+    fun testStatusUpdateNoResult() {
+        `when`(statusRepository!!.getMemberStatusUpdates()).thenReturn(Flowable.never())
+        presenter!!.getStatusUpdates()
+        verify(view, never())!!.showStatusUpdatesError()
     }
 }
