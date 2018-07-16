@@ -23,7 +23,9 @@ import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.util.concurrent.Executor
 import java.util.concurrent.TimeUnit
-
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 
 class TeamMembersPresenterTest {
 
@@ -68,10 +70,27 @@ class TeamMembersPresenterTest {
     }
 
     @Test
-    fun testTeamMembersDisplayed() {
+    fun testAttachView() {
+        presenter!!.attach(view!!)
+        assertNotNull(presenter!!.baseView)
+        assertEquals(view!!, presenter!!.baseView,
+                "the view associated with the presenter is not the same as the one used" +
+                        " on the init process")
+    }
+
+    @Test
+    fun testDettachView() {
+        presenter!!.dettach()
+        assertNull(presenter!!.baseView)
+    }
+
+    @Test
+    fun testTeamMembersCalled() {
         `when`(teamRepository!!.getTeam()).thenReturn(Observable.just(ArrayList()))
         presenter!!.getTeamMembers()
+        verify(view)!!.showLoader(true)
         verify(view)!!.showTeamMembers(ArrayList())
+        verify(view, atLeastOnce())!!.showLoader(false)
     }
 
     @Test
@@ -94,6 +113,8 @@ class TeamMembersPresenterTest {
     fun testTeamMembersDisplayError() {
         `when`(teamRepository!!.getTeam()).thenReturn(Observable.error(Exception()))
         presenter!!.getTeamMembers()
+        verify(view)!!.showLoader(true)
+        verify(view, atLeastOnce())!!.showLoader(false)
         verify(view)!!.showError()
     }
 
