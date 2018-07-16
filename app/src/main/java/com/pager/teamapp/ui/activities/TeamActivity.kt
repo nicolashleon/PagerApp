@@ -49,7 +49,7 @@ class TeamActivity : AppCompatActivity(), TeamMembersView, TeamMembersAdapter.On
     }
 
     override fun onPause() {
-        presenter.dettach()
+        presenter.detach()
         super.onPause()
     }
 
