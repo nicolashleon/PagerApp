@@ -14,14 +14,19 @@ import com.pager.teamapp.ui.CircleTransform
 import com.pager.teamapp.ui.models.TeamMember
 import com.squareup.picasso.Picasso
 
-class TeamMembersDelegateAdapter(private val onItemExpandedListener: OnItemExpandedListener) : DelegateAdapter<TeamMembersDelegateAdapter.TeamMemberViewHolder, TeamMember> {
+class TeamMembersDelegateAdapter(private val onItemExpandedListener: OnItemExpandedListener,
+                                 private val onItemStatusUpdateListener: OnItemStatusUpdateListener) : DelegateAdapter<TeamMembersDelegateAdapter.TeamMemberViewHolder, TeamMember> {
 
     interface OnItemExpandedListener {
         fun onItemExpanded(itemPos: Int, isExpanded: Boolean)
     }
 
+    interface OnItemStatusUpdateListener {
+        fun onStatusUpdated(itemPos: Int)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamMemberViewHolder {
-        return TeamMemberViewHolder(parent, onItemExpandedListener)
+        return TeamMemberViewHolder(parent, onItemExpandedListener, onItemStatusUpdateListener)
     }
 
     override fun onBindViewHolder(viewHolder: TeamMemberViewHolder, uiModel: TeamMember) {
@@ -33,6 +38,7 @@ class TeamMembersDelegateAdapter(private val onItemExpandedListener: OnItemExpan
             if (status.isNotEmpty()) {
                 viewHolder.statusTextView.text = status
             }
+            
             if (picture.isNotEmpty()) {
                 Picasso.get().load(picture)
                         .transform(CircleTransform())
@@ -55,7 +61,7 @@ class TeamMembersDelegateAdapter(private val onItemExpandedListener: OnItemExpan
         }
     }
 
-    class TeamMemberViewHolder(parent: ViewGroup, onItemExpandedListener: OnItemExpandedListener) : ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_team_member, parent, false)) {
+    class TeamMemberViewHolder(parent: ViewGroup, onItemExpandedListener: OnItemExpandedListener, onItemStatusUpdateListener: OnItemStatusUpdateListener) : ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_team_member, parent, false)) {
         val nameTextView: TextView by lazy { itemView.findViewById(R.id.nameTextView) as TextView }
         val roleTextView: TextView by lazy { itemView.findViewById(R.id.roleTextView) as TextView }
         val statusTextView: TextView by lazy { itemView.findViewById(R.id.statusTextView) as TextView }
@@ -66,6 +72,7 @@ class TeamMembersDelegateAdapter(private val onItemExpandedListener: OnItemExpan
         val picture: ImageView by lazy { itemView.findViewById(R.id.imageView) as ImageView }
         val dropButton: Button by lazy { itemView.findViewById(R.id.dropButton) as Button }
         val additionalInformationCardView: CardView by lazy { itemView.findViewById(R.id.additionalInformationCardView) as CardView }
+        val sendStatusUpdateBtn: Button by lazy { itemView.findViewById(R.id.sendStatusUpdateBtn) as Button }
 
         init {
             val clickListener = View.OnClickListener {
@@ -76,6 +83,12 @@ class TeamMembersDelegateAdapter(private val onItemExpandedListener: OnItemExpan
             }
             itemView.setOnClickListener(clickListener)
             dropButton.setOnClickListener(clickListener)
+            sendStatusUpdateBtn.setOnClickListener {
+                val pos = adapterPosition
+                if (pos != NO_POSITION) {
+                    onItemStatusUpdateListener.onStatusUpdated(pos)
+                }
+            }
         }
 
     }
