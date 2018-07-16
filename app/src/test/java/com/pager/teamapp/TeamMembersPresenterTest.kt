@@ -58,15 +58,27 @@ class TeamMembersPresenterTest {
         }
 
 
-        RxJavaPlugins.setInitIoSchedulerHandler { scheduler -> immediate }
-        RxJavaPlugins.setInitComputationSchedulerHandler { scheduler -> immediate }
-        RxJavaPlugins.setInitNewThreadSchedulerHandler { scheduler -> immediate }
-        RxJavaPlugins.setInitSingleSchedulerHandler { scheduler -> immediate }
-        RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> immediate }
+        RxJavaPlugins.setInitIoSchedulerHandler { immediate }
+        RxJavaPlugins.setInitComputationSchedulerHandler { immediate }
+        RxJavaPlugins.setInitNewThreadSchedulerHandler { immediate }
+        RxJavaPlugins.setInitSingleSchedulerHandler { immediate }
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler { immediate }
 
         MockitoAnnotations.initMocks(this)
         presenter = TeamMembersPresenter(teamRepository!!, statusRepository!!, logger)
         presenter!!.attach(view!!)
+    }
+
+    @Test
+    fun testPrimaryConstructor() {
+        val presenter = TeamMembersPresenter(teamRepository!!, statusRepository!!, logger)
+        assertNull(presenter.baseView)
+    }
+
+    @Test
+    fun testSecondaryConstructor() {
+        val presenter = TeamMembersPresenter(teamRepository!!, statusRepository!!, logger)
+        assertNull(presenter.baseView)
     }
 
     @Test
@@ -79,8 +91,8 @@ class TeamMembersPresenterTest {
     }
 
     @Test
-    fun testDettachView() {
-        presenter!!.dettach()
+    fun testDetachView() {
+        presenter!!.detach()
         assertNull(presenter!!.baseView)
     }
 
