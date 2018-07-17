@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pager Team App</string>
+    <string name="app_name">Pager</string>
     <string name="title_activity_team_toolbar">Pager Team</string>
     <string name="txt_error_msg_load_team">Error loading team members</string>
     <string name="txt_error_msg_load_new_members">Error fetching new team members</string>
