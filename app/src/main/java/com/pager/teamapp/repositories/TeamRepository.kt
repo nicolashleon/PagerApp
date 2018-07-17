@@ -13,15 +13,14 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class TeamRepository {
+    private val retrofit = Retrofit.Builder()
+            .baseUrl(BuildConfig.APP_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+    private val service = retrofit.create(TeamService::class.java)
+
     fun getTeam(): Observable<List<TeamMember>> {
-
-        val retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.APP_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
-
-        val service = retrofit.create(TeamService::class.java)
 
         return service.getTeam().flatMap({
             service.getRoles()
