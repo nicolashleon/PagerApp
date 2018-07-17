@@ -6,8 +6,8 @@ import retrofit2.http.GET
 
 interface TeamService {
     @GET("/team")
-    fun getTeam() : Observable<List<Person>>
+    fun getTeam(): Observable<List<Person>>
 
     @GET("/roles")
-    fun getRoles() : Observable<Map<String, String>>
+    fun getRoles(): Observable<Map<String, String>>
 }

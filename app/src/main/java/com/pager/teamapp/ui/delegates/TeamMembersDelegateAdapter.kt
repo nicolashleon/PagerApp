@@ -38,7 +38,7 @@ class TeamMembersDelegateAdapter(private val onItemExpandedListener: OnItemExpan
             if (status.isNotEmpty()) {
                 viewHolder.statusTextView.text = status
             }
-            
+
             if (picture.isNotEmpty()) {
                 Picasso.get().load(picture)
                         .transform(CircleTransform())
