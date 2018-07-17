@@ -33,7 +33,7 @@ class TeamActivity : AppCompatActivity(), TeamMembersView, TeamMembersAdapter.On
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        supportActionBar?.title = getString(R.string.activity_team_toolbar_title)
+        supportActionBar?.title = getString(R.string.title_activity_team_toolbar)
         presenter = TeamMembersPresenter()
         adapter = TeamMembersAdapter(this)
         recyclerView.layoutManager = LinearLayoutManager(this@TeamActivity)
@@ -68,7 +68,7 @@ class TeamActivity : AppCompatActivity(), TeamMembersView, TeamMembersAdapter.On
                 getString(R.string.txt_error_msg_load_team),
                 Snackbar.LENGTH_LONG)
 
-        snackbar.setAction(getString(R.string.action_reload)) { presenter.getTeamMembers() }
+        snackbar.setAction(getString(R.string.txt_snackbar_action_reload)) { presenter.getTeamMembers() }
         snackbar.show()
 
     }
@@ -106,7 +106,7 @@ class TeamActivity : AppCompatActivity(), TeamMembersView, TeamMembersAdapter.On
                 getString(R.string.txt_error_msg_load_new_members),
                 Snackbar.LENGTH_LONG)
 
-        snackbar.setAction(getString(R.string.action_reload)) { presenter.getNewMemberUpdates() }
+        snackbar.setAction(getString(R.string.txt_snackbar_action_reload)) { presenter.getNewMemberUpdates() }
         snackbar.show()
     }
 
@@ -115,7 +115,7 @@ class TeamActivity : AppCompatActivity(), TeamMembersView, TeamMembersAdapter.On
                 getString(R.string.txt_error_msg_load_teams_status),
                 Snackbar.LENGTH_LONG)
 
-        snackbar.setAction(getString(R.string.action_reload)) { presenter.getStatusUpdates() }
+        snackbar.setAction(getString(R.string.txt_snackbar_action_reload)) { presenter.getStatusUpdates() }
         snackbar.show()
     }
 

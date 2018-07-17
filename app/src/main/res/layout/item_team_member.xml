@@ -137,7 +137,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/normal_margin"
                 android:background="@color/colorPrimary"
-                android:text="@string/txt_update_status_btn"
+                android:text="@string/txt_btn_update_status"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
