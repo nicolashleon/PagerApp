@@ -9,7 +9,7 @@ data class TeamMember(var name: String = String.EMPTY_STRING(),
                       var skills: List<String> = ArrayList(),
                       var location: String = String.EMPTY_STRING(),
                       var status: String = String.EMPTY_STRING(),
-                      var github : String = String.EMPTY_STRING(),
+                      var github: String = String.EMPTY_STRING(),
                       var isExpanded: Boolean = false) : DelegateUIModel {
 
     companion object {

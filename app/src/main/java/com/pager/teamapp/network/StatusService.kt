@@ -18,5 +18,5 @@ interface StatusService {
     fun getMemberStatusUpdates(): Flowable<StatusUpdate>
 
     @Send
-    fun sendMemberStatusUpdates(statusUpdate: StatusUpdate) : Boolean
+    fun sendMemberStatusUpdates(statusUpdate: StatusUpdate): Boolean
 }
